@@ -27,10 +27,20 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
-}
 
+function getFizzBuzz(num) {
+  if (num % 3 === 0 && num % 5 === 0) {
+    return 'FizzBuzz';
+  }
+  if (num % 3 === 0) {
+    return 'Fizz';
+  }
+  if (num % 5 === 0) {
+    return 'Buzz';
+  }
+  return num;
+}
+getFizzBuzz(2);
 
 /**
  * Returns the factorial of the specified integer n.
@@ -43,10 +53,10 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  return n > 1 ? n * getFactorial(n - 1) : 1;
 }
-
+getFactorial(1);
 
 /**
  * Returns the sum of integer numbers between n1 and n2 (inclusive).
@@ -80,10 +90,16 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  if (a <= 0 || b <= 0 || c <= 0) {
+    return false;
+  }
+  if (a + b > c && a + c > b && c + b > a) {
+    return true;
+  }
+  return false;
 }
-
+isTriangle(3, 4, 5);
 
 /**
  * Returns true, if two specified axis-aligned rectangles overlap, otherwise false.
@@ -117,9 +133,24 @@ function isTriangle(/* a, b, c */) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  if (rect1.top + rect1.height <= rect2.top
+        || rect1.left + rect1.width <= rect2.left || rect2.left >= rect1.left + rect1.width) {
+    return false;
+  }
+  return true;
 }
+doRectanglesOverlap({
+  top: 0,
+  left: 0,
+  width: 10,
+  height: 10,
+}, {
+  top: 20,
+  left: 20,
+  width: 20,
+  height: 20,
+});
 
 
 /**
@@ -208,10 +239,11 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  const rev = str.split('').reverse().join('');
+  return rev;
 }
-
+reverseString('The quick brown fox jumps over the lazy dog');
 
 /**
  * Reverse the specified integer number (put all digits in reverse order)
@@ -225,10 +257,11 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  const int = String(num).split('').reverse().join('');
+  return int;
 }
-
+reverseInteger(87354);
 
 /**
  * Validates the CCN (credit card number) and return true if CCN is valid
