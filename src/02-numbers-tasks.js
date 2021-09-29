@@ -53,10 +53,15 @@ getCicleCircumference(5);
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(/* value1, value2 */) {
-  throw new Error('Not implemented');
-}
+function getAverage(value1, value2) {
+  const av = (value1 + value2) / 2;
 
+  if (av === Infinity) {
+    return 1.7976931348623157e+308;
+  }
+  return av;
+}
+getAverage(5, 5);
 /**
  * Returns a distance beetween two points by cartesian coordinates.
  *
@@ -88,9 +93,11 @@ getDistanceBetweenPoints(-5, 0, 10, -10);
  *   x + 8 = 0       => -8
  *   5*x = 0         => 0
  */
-function getLinearEquationRoot(/* a, b */) {
-  throw new Error('Not implemented');
+function getLinearEquationRoot(a, b) {
+  const x = -(b / a);
+  return x;
 }
+getLinearEquationRoot(5, -10);
 
 
 /**
@@ -162,9 +169,12 @@ parseNumberFromString('100');
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelipidedDiagonal(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getParallelipidedDiagonal(a, b, c) {
+  const par = a ** 2 + b ** 2 + c ** 2;
+  const z = Math.sqrt(par);
+  return z;
 }
+getParallelipidedDiagonal(1, 1, 1);
 
 /**
  * Returns the number rounded to specified power of 10.

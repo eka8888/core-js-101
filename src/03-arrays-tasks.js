@@ -214,7 +214,7 @@ getTail([1, 3, 4, 5], 2);
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-  const toCsvText1 = arr.map((el) => el.map((n) => n.toString()).join(',')).join('\n');
+  const toCsvText1 = arr.map((el) => el.map((el1) => el1.toString()).join(',')).join('\n');
   return toCsvText1;
 }
 toCsvText([
@@ -530,10 +530,11 @@ getIdentityMatrix(5);
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const int = new Array(end - start + 1).fill().map((_, i) => start + i);
+  return int;
 }
-
+getIntervalArray(2, 5);
 /**
  * Returns array containing only unique values from the specified array.
  *
@@ -599,11 +600,18 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  const arr1 = [];
+  arr.map((el) => arr1.push(...childrenSelector(el)));
+
+  return arr1;
 }
 
-
+selectMany([
+  [1, 2],
+  [3, 4],
+  [5, 6],
+], (x) => x);
 /**
  * Returns an element from the multidimentional array by the specified indexes.
  *
@@ -616,9 +624,15 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  const ind = indexes.reduce((prev, curr) => prev[curr], arr);
+  return ind;
 }
+getElementByIndexes([
+  [1, 2],
+  [3, 4],
+  [5, 6],
+], [0, 0], 2);
 
 
 /**
@@ -639,10 +653,17 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
-}
+function swapHeadAndTail(arr) {
+  const { length } = arr;
+  const tail = arr.slice(-(length / 2));
+  const head = arr.slice(0, (length / 2));
 
+  if (length % 2 !== 0 && length > 1) {
+    return [...tail, arr[Math.floor(length / 2)], ...head];
+  }
+  return [...tail, ...head];
+}
+swapHeadAndTail([1, 2, 3, 4, 5, 6, 7, 8]);
 
 module.exports = {
   findElement,

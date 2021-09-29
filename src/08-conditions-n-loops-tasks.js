@@ -70,9 +70,13 @@ getFactorial(1);
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  const arr = new Array(n2 - n1 + 1).fill().map((_, i) => n1 + i);
+  const arr1 = (previousValue, currentValue) => previousValue + currentValue;
+  return arr.reduce(arr1);
 }
+
+getSumBetweenNumbers(1, 2);
 
 
 /**
@@ -179,9 +183,14 @@ doRectanglesOverlap({
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const circle1 = Math.sqrt((point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2);
+  if (circle1 < circle.radius) {
+    return true;
+  }
+  return false;
 }
+isInsideCircle({ center: { x: 0, y: 0 }, radius: 10 }, { x: 10, y: 10 });
 
 
 /**
@@ -195,10 +204,11 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const first = [...str].filter((el) => !(str.split(el).length - 2))[0] || null;
+  return first;
 }
-
+findFirstSingleChar('abracadabra');
 
 /**
  * Returns the string representation of math interval,
@@ -222,10 +232,29 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const arr = [];
+  if (isStartIncluded === true && isEndIncluded === true) {
+    arr.splice(0, 0, a, b);
+    const c = arr.sort().join(', ');
+    const cc = `[${c}]`;
+    return cc;
+  }
+  if (isStartIncluded === true && isEndIncluded === false) {
+    const c1 = `[${a}, ${b})`;
+    return c1;
+  }
+  if (isStartIncluded === false && isEndIncluded === true) {
+    const c2 = `(${a}, ${b}]`;
+    return c2;
+  }
+  if (isStartIncluded === false && isEndIncluded === false) {
+    const c3 = `(${a}, ${b})`;
+    return c3;
+  }
+  return arr;
 }
-
+getIntervalString(0, 1, true, true);
 
 /**
  * Reverse the specified string (put all chars in reverse order)
@@ -267,7 +296,8 @@ reverseInteger(87354);
  * Validates the CCN (credit card number) and return true if CCN is valid
  * and false otherwise.
  *
- * See algorithm here : https://en.wikipedia.org/wiki/Luhn_algorithm
+ * See algorithm here :
+ *
  *
  * @param {number} cnn
  * @return {boolean}
@@ -301,9 +331,20 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(number) {
+  let root = number;
+  let arr = [];
+  const reducer = ((a, b) => Number(a) + Number(b));
+
+  while (root > 9) {
+    arr = root.toString().split('');
+    root = arr.reduce(reducer);
+  }
+
+  return root;
 }
+
+getDigitalRoot(23456);
 
 
 /**
@@ -352,9 +393,11 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  const num1 = num.toString(n);
+  return num1;
 }
+toNaryString(1024, 2);
 
 
 /**

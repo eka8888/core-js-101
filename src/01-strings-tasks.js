@@ -219,27 +219,30 @@ extractEmails('angus.young@gmail.com;brian.johnson@hotmail.com;bon.scott@yahoo.c
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  const a1 = `┌${'─'.repeat(width - 2)}┐\n`;
+  const a2 = `│${' '.repeat(width - 2)}│\n`;
+  const a3 = `└${'─'.repeat(width - 2)}┘\n`;
+  return a1 + a2.repeat(height - 2) + a3;
 }
 
-
+getRectangleString(6, 4);
 /**
- * Encode specified string with ROT13 cipher
- * See details:  https://en.wikipedia.org/wiki/ROT13
- *
- * @param {string} str
- * @return {string}
- *
- * @example
- *
- *   'hello' => 'uryyb'
- *   'Why did the chicken cross the road?' => 'Jul qvq gur puvpxra pebff gur ebnq?'
- *   'Gb trg gb gur bgure fvqr!' => 'To get to the other side!'
- *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
- *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
- *
- */
+     * Encode specified string with ROT13 cipher
+     * See details:  https://en.wikipedia.org/wiki/ROT13
+     *
+     * @param {string} str
+     * @return {string}
+     *
+     * @example
+     *
+     *   'hello' => 'uryyb'
+     *   'Why did the chicken cross the road?' => 'Jul qvq gur puvpxra pebff gur ebnq?'
+     *   'Gb trg gb gur bgure fvqr!' => 'To get to the other side!'
+     *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+     *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
+     *
+     */
 function encodeToRot13(str) {
   return (str || this).split('').map((_) => {
     if (!_.match(/[A-Za-z]/)) return _;

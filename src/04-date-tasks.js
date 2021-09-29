@@ -54,10 +54,12 @@ parseDataFromIso8601('2016-01-19T16:07:37+00:00');
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
+function isLeapYear(date) {
+  const year1 = new Date(date);
+  const year = year1.getFullYear();
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }
-
+isLeapYear(Date(1900, 1, 1));
 
 /**
  * Returns the string represention of the timespan between two dates.
